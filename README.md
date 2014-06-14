@@ -1,4 +1,4 @@
-BEBPP0015_Questionmark_Moodle_Connector
+BEBPP0015 Questionmark Moodle Connector
 =======================================
 
 The Moodle instance for the questionmark moodle connector testing
