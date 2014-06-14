@@ -1,0 +1,1 @@
+default['oracle_instantclient']['basic_rpm'] = 'oracle-instantclient12.1-basic-12.1.0.1.0-1.x86_64.rpm'

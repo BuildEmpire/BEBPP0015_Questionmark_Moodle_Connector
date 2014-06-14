@@ -1,6 +1,7 @@
 {
   "run_list":[
     "nodejs",
+    "oracle_instantclient",
     "cookbook_moodle",
     "cookbook_rubybox"
   ],
@@ -14,9 +15,14 @@
     "download": false,
     "database": {
       "root_password": "yyUs87dj3mJsk",
-      "database_name": "qm_moodle",
-      "username": "qm_moodle",
+      "database_name": "qmmoodle",
+      "username": "qmmoodle",
       "password": "spO0sdlsma7sSw"
     }
+  },
+  "cookbook_phpbox": {
+    "php_pears": [
+      "oci8"
+    ]
   }
 }

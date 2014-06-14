@@ -8,3 +8,5 @@ cookbook 'cookbook_moodle', git: "https://github.com/ToMoCoop/BEBUI0000_Cookbook
 cookbook 'php', "= 1.2.4"
 cookbook 'php-fpm', ">= 0.6.3"
 cookbook "cookbook_phpbox", git: "https://github.com/ToMoCoop/BEBUI0000_Cookbook_PHPBox.git"
+
+cookbook 'oracle_instantclient', path: 'cookbooks/oracle_instantclient'
