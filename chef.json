@@ -1,6 +1,7 @@
 {
   "run_list":[
     "nodejs",
+    "zip",
     "oracle_instantclient",
     "cookbook_moodle",
     "cookbook_rubybox"

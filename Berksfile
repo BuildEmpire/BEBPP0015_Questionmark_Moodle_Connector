@@ -1,5 +1,6 @@
 site :opscode
 cookbook 'cookbook_rubybox', git: "https://github.com/ToMoCoop/BEBUI0000_Cookbook_RubyBox.git"
+cookbook 'zip'
 cookbook 'nodejs'
 
 cookbook 'cookbook_moodle', git: "https://github.com/ToMoCoop/BEBUI0000_Cookbook_Moodle.git"
