@@ -25,8 +25,8 @@
  *    2.0.00  18-Feb-13
 */
 
-require_once('lib.php');
-require_once('lti/OAuth.php');
+require_once(__DIR__ . '/lib.php');
+require_once(__DIR__ . '/lti/OAuth.php');
 
   session_name(SESSION_NAME . '-TEST');
   session_start();

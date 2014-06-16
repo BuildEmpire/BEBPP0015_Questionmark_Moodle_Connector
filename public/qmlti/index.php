@@ -25,12 +25,12 @@
 
 // Check if this is a launch request for backwards compatibility
   if (isset($_POST['oauth_consumer_key'])) {
-    require_once('launch.php');
+    require_once(__DIR__ . '/launch.php');
     exit;
   }
 
 
-require_once('lib.php');
+require_once(__DIR__ . '/lib.php');
 
   session_name(SESSION_NAME);
   session_start();

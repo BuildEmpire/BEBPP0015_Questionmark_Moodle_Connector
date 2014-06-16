@@ -26,8 +26,8 @@
  *    2.0.00  18-Feb-13  Updated to support multiple LMS configuration
 */
 
-require_once('config.php');
-require_once('lti/LTI_Tool_Provider.php');
+require_once(__DIR__ . '/config.php');
+require_once(__DIR__ . '/lti/LTI_Tool_Provider.php');
 
 // Ensure timezone is set (default to UTC)
   $cfg_timezone = date_default_timezone_get();

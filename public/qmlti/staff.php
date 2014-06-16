@@ -25,8 +25,8 @@
  *    2.0.00  18-Feb-13  Moved script into page header
 */
 
-require_once('lib.php');
-require_once('LTI_Data_Connector_qmp.php');
+require_once(__DIR__ . '/lib.php');
+require_once(__DIR__ . '/LTI_Data_Connector_qmp.php');
 
 // Initialise database
   $db = open_db();
