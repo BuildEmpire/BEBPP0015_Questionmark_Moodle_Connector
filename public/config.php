@@ -17,7 +17,7 @@ $CFG->dboptions = array (
 );
 
 $CFG->wwwroot   = 'http://ec2-54-74-58-121.eu-west-1.compute.amazonaws.com';
-$CFG->dataroot  = '/home/apps/qm_buildempire_co_uk/shared/data';
+$CFG->dataroot  = '/home/apps/qm_buildempire_co_uk/shared/public/data';
 $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 0777;
