@@ -16,7 +16,7 @@ $CFG->dboptions = array (
   'dbport' => 1521
 );
 
-$CFG->wwwroot   = 'http://localhost';
+$CFG->wwwroot   = 'http://ec2-54-74-58-121.eu-west-1.compute.amazonaws.com';
 $CFG->dataroot  = '/home/apps/qm_buildempire_co_uk/shared/data';
 $CFG->admin     = 'admin';
 
