@@ -1,8 +1,8 @@
 # Set the application name
-set :application, 'lmr_buildempire_co_uk'
+set :application, 'qm_buildempire_co_uk'
 
 # Set the repository url
-set :repo_url,  'git@github.com:BuildEmpire/BEBPP0014_Learning_Media_Resources.git'
+set :repo_url,  'git@github.com:BuildEmpire/BEBPP0015_Questionmark_Moodle_Connector.git'
 
 
 
@@ -55,21 +55,6 @@ end
 before 'deploy:starting', :check_for_ssh_agent
 
 set :pty, true
-
-namespace :data do
-  task :dump_sql do
-    on roles(:app) do
-      within "#{shared_path}/private/backup" do
-        mysqldump_filename = "Backup-%s.sql" % [Time.now.to_i]
-        mysqldump_filename_gz = "%s.gz" % mysqldump_filename
-        mysqldump_filepath_gz = "%s/private/backup/%s" % [shared_path, mysqldump_filename_gz]
-        execute "mysqldump --user=moodle --password='YYYYYYYYYYYYY' moodle | gzip > #{mysqldump_filepath_gz}"
-        download! "#{mysqldump_filepath_gz}", "private/database/#{mysqldump_filename_gz}", :via => :scp
-        execute :rm, mysqldump_filepath_gz
-      end
-    end
-  end
-end
 
 namespace :deploy do
 
