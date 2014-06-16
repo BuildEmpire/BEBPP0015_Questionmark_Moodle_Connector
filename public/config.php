@@ -4,21 +4,6 @@ unset($CFG);
 global $CFG;
 $CFG = new stdClass();
 
-/**
-$CFG->dbtype    = 'mysqli';
-$CFG->dblibrary = 'native';
-$CFG->dbhost    = 'localhost';
-$CFG->dbname    = 'qmmoodle';
-$CFG->dbuser    = 'qmmoodle';
-$CFG->dbpass    = 'spO0sdlsma7sSw';
-$CFG->prefix    = 'mdl_';
-$CFG->dboptions = array (
-  'dbpersist' => 0,
-  'dbsocket' => 0,
-);
-*/
-
-
 $CFG->dbtype    = 'oci';
 $CFG->dblibrary = 'native';
 $CFG->dbhost    = 'qmmoodle.caaoub65vm2a.eu-west-1.rds.amazonaws.com';
@@ -27,8 +12,8 @@ $CFG->dbuser    = 'qmmoodle';
 $CFG->dbpass    = 'spO0sdlsma7sSw';
 $CFG->prefix    = 'm_';
 $CFG->dboptions = array (
-    'dbpersist' => 0,
-    'dbport' => 1521
+  'dbpersist' => 0,
+  'dbport' => 1521
 );
 
 $CFG->wwwroot   = 'http://localhost';
