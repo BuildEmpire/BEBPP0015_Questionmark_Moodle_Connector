@@ -1,6 +1,6 @@
 <?php
 
-$conn = new PDO('oci:dbname=//qmmoodle.caaoub65vm2a.eu-west-1.rds.amazonaws.com:1521/qmmoodle', 'qmmoodle', 'spO0sdlsma7sSw');
+$conn = new PDO('oci8:dbname=//qmmoodle.caaoub65vm2a.eu-west-1.rds.amazonaws.com:1521/qmmoodle', 'qmmoodle', 'spO0sdlsma7sSw');
 
 echo "in1<br>";
 $sql = 'CREATE DATABASE Perception_LTI';
