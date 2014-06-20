@@ -25,8 +25,8 @@
  *    2.0.00  18-Feb-13  Renamed from index.php
 */
 
-require_once(__DIR__ . '/lib.php');
-require_once(__DIR__ . '/LTI_Data_Connector_qmp.php');
+require_once('lib.php');
+require_once('LTI_Data_Connector_qmp.php');
 
   session_name(SESSION_NAME);
   session_start();

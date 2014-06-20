@@ -25,7 +25,7 @@
  *    2.0.00  18-Feb-13
 */
 
-require_once(__DIR__ . '/lib.php');
+require_once('lib.php');
 
 // initialise database
   $db = open_db();
