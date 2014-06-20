@@ -46,7 +46,7 @@
 /**
  * OAuth libaray file
  */
-require_once('OAuth.php');
+require_once(__DIR__ . '/OAuth.php');
 
 /**
  * Class to represent an LTI Tool Provider

@@ -46,11 +46,9 @@ define('QM_USERNAME_PREFIX', '');  // prefix to add to user IDs supplied by the 
 */
 
 // Uncomment and complete this section if the database settings are not specified via environment variables (of the same names)
-/*
 define('DB_SERVER', '');           // leave empty except for SQL Server
-define('DB_NAME', '');             // e.g. 'sqlite:qmp-lti.sqlitedb' or 'mysql:dbname=qmp-lti;host=localhost'
-define('DB_USERNAME', '');         // name of account used to access database
-define('DB_PASSWORD', '');         // password for database account
-*/
+define('DB_NAME', 'oci:dbname=//perceptionlti.caaoub65vm2a.eu-west-1.rds.amazonaws.com:1521/ORCL');             // e.g. 'sqlite:qmp-lti.sqlitedb' or 'mysql:dbname=qmp-lti;host=localhost'
+define('DB_USERNAME', 'qmmoodle');         // name of account used to access database
+define('DB_PASSWORD', 'spO0sdlsma7sSw');         // password for database account
 
 ?>

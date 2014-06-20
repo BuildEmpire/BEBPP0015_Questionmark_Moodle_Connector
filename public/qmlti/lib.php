@@ -26,8 +26,8 @@
  *    2.0.00  18-Feb-13  Updated to support multiple LMS configuration
 */
 
-require_once('config.php');
-require_once('lti/LTI_Tool_Provider.php');
+require_once(__DIR__ . '/config.php');
+require_once(__DIR__ . '/lti/LTI_Tool_Provider.php');
 
 // Ensure timezone is set (default to UTC)
   $cfg_timezone = date_default_timezone_get();
@@ -230,54 +230,144 @@ EOD;
 
       if (!defined('CONSUMER_KEY')) {
         $sql = 'CREATE TABLE IF NOT EXISTS ' . TABLE_PREFIX . 'lti_customer ' .
-               '(customer_id VARCHAR(100),' .
-               ' qmwise_client_id VARCHAR(32),' .
-               ' qmwise_checksum CHAR(32), ' .
-               'PRIMARY KEY (customer_id))';
+          '(customer_id VARCHAR(100),' .
+          ' qmwise_client_id VARCHAR(32),' .
+          ' qmwise_checksum CHAR(32), ' .
+          'PRIMARY KEY (customer_id))';
         $ok = $db->exec($sql) !== FALSE;
       }
 
       if ($ok && !defined('CONSUMER_KEY')) {
         $sql = 'CREATE TABLE IF NOT EXISTS ' . TABLE_PREFIX . LTI_Data_Connector::CONSUMER_TABLE_NAME . ' ' .
-               '(consumer_key VARCHAR(50) NOT NULL,' .
-               ' secret VARCHAR(50) NOT NULL,' .
-               ' consumer_name VARCHAR(20) NOT NULL,' .
-               ' customer_id VARCHAR(25) NOT NULL,' .
-               ' username_prefix VARCHAR(10) NULL,' .
-               ' last_access DATETIME NULL,' .
-               ' created DATETIME NOT NULL,' .
-               ' updated DATETIME NOT NULL,' .
-               'PRIMARY KEY (consumer_key))';
+          '(consumer_key VARCHAR(50) NOT NULL,' .
+          ' secret VARCHAR(50) NOT NULL,' .
+          ' consumer_name VARCHAR(20) NOT NULL,' .
+          ' customer_id VARCHAR(25) NOT NULL,' .
+          ' username_prefix VARCHAR(10) NULL,' .
+          ' last_access DATETIME NULL,' .
+          ' created DATETIME NOT NULL,' .
+          ' updated DATETIME NOT NULL,' .
+          'PRIMARY KEY (consumer_key))';
         $ok = $db->exec($sql) !== FALSE;
       }
 
       if ($ok) {
         $sql = 'CREATE TABLE IF NOT EXISTS ' . TABLE_PREFIX . LTI_Data_Connector::RESOURCE_LINK_TABLE_NAME . ' ' .
-               '(consumer_key VARCHAR(50) NOT NULL DEFAULT \'\',' .
-               ' context_id VARCHAR(100),' .
-               ' settings TEXT,' .
-               ' created DATETIME,' .
-               ' updated DATETIME, ' .
-               'PRIMARY KEY (consumer_key, context_id))';
+          '(consumer_key VARCHAR(50) NOT NULL DEFAULT \'\',' .
+          ' context_id VARCHAR(100),' .
+          ' settings TEXT,' .
+          ' created DATETIME,' .
+          ' updated DATETIME, ' .
+          'PRIMARY KEY (consumer_key, context_id))';
         $ok = $db->exec($sql) !== FALSE;
       }
 
       if ($ok) {
         $sql = 'CREATE TABLE IF NOT EXISTS ' . TABLE_PREFIX . LTI_Data_Connector::NONCE_TABLE_NAME . ' ' .
-               '(consumer_key VARCHAR(50) NOT NULL DEFAULT \'\',' .
-               ' value VARCHAR(32) NOT NULL,' .
-               ' expires DATETIME NOT NULL, ' .
-               'PRIMARY KEY (consumer_key, value))';
+          '(consumer_key VARCHAR(50) NOT NULL DEFAULT \'\',' .
+          ' value VARCHAR(32) NOT NULL,' .
+          ' expires DATETIME NOT NULL, ' .
+          'PRIMARY KEY (consumer_key, value))';
         $ok = $db->exec($sql) !== FALSE;
       }
 
       if ($ok) {
         $sql = 'CREATE TABLE IF NOT EXISTS ' . TABLE_PREFIX . 'lti_outcome ' .
-               '(result_sourcedid VARCHAR(255),' .
-               ' score VARCHAR(255),' .
-               ' created DATETIME)';
+          '(result_sourcedid VARCHAR(255),' .
+          ' score VARCHAR(255),' .
+          ' created DATETIME)';
         $ok = $db->exec($sql) !== FALSE;
       }
+
+    } else if (($db->getAttribute(PDO::ATTR_DRIVER_NAME) == 'oci')) {
+
+      if (!defined('CONSUMER_KEY')) {
+        $sql = 'CREATE TABLE ' . TABLE_PREFIX . 'lti_customer ' .
+          '(customer_id VARCHAR(100),' .
+          ' qmwise_client_id VARCHAR(32),' .
+          ' qmwise_checksum CHAR(32), ' .
+          'PRIMARY KEY (customer_id))';
+        $ok = $db->exec($sql) !== FALSE;
+        if (!$ok) {
+          $errorInfo = $db->errorInfo();
+          // If the error is that the table exists, we can ignore it.
+          if ($errorInfo[1] == 955) {
+            $ok = true;
+          }
+        }
+      }
+
+      if ($ok && !defined('CONSUMER_KEY')) {
+        $sql = 'CREATE TABLE ' . TABLE_PREFIX . LTI_Data_Connector::CONSUMER_TABLE_NAME . ' ' .
+          '(consumer_key VARCHAR(50) NOT NULL,' .
+          ' secret VARCHAR(50) NOT NULL,' .
+          ' consumer_name VARCHAR(20) NOT NULL,' .
+          ' customer_id VARCHAR(25) NOT NULL,' .
+          ' username_prefix VARCHAR(10) NULL,' .
+          ' last_access DATE NULL,' .
+          ' created DATE NOT NULL,' .
+          ' updated DATE NOT NULL,' .
+          'PRIMARY KEY (consumer_key))';
+        $ok = $db->exec($sql) !== FALSE;
+        if (!$ok) {
+          $errorInfo = $db->errorInfo();
+          // If the error is that the table exists, we can ignore it.
+          if ($errorInfo[1] == 955) {
+            $ok = true;
+          }
+        }
+      }
+
+      if ($ok) {
+        $sql = 'CREATE TABLE ' . TABLE_PREFIX . LTI_Data_Connector::RESOURCE_LINK_TABLE_NAME . ' ' .
+          '(consumer_key VARCHAR(50) NOT NULL,' .
+          ' context_id VARCHAR(100),' .
+          ' settings CLOB,' .
+          ' created DATE,' .
+          ' updated DATE,' .
+          'PRIMARY KEY (consumer_key, context_id))';
+        $ok = $db->exec($sql) !== FALSE;
+        if (!$ok) {
+          $errorInfo = $db->errorInfo();
+          // If the error is that the table exists, we can ignore it.
+          if ($errorInfo[1] == 955) {
+            $ok = true;
+          }
+        }
+      }
+
+      if ($ok) {
+        $sql = 'CREATE TABLE ' . TABLE_PREFIX . LTI_Data_Connector::NONCE_TABLE_NAME . ' ' .
+          '(consumer_key VARCHAR(50) NOT NULL,' .
+          ' value VARCHAR(32) NOT NULL,' .
+          ' expires DATE NOT NULL, ' .
+          'PRIMARY KEY (consumer_key, value))';
+        $ok = $db->exec($sql) !== FALSE;
+        if (!$ok) {
+          $errorInfo = $db->errorInfo();
+          // If the error is that the table exists, we can ignore it.
+          if ($errorInfo[1] == 955) {
+            $ok = true;
+          }
+        }
+      }
+
+      if ($ok) {
+        $sql = 'CREATE TABLE ' . TABLE_PREFIX . 'lti_outcome ' .
+          '(result_sourcedid VARCHAR(255),' .
+          ' score VARCHAR(255),' .
+          ' created DATE)';
+        $ok = $db->exec($sql) !== FALSE;
+        if (!$ok) {
+          $errorInfo = $db->errorInfo();
+          // If the error is that the table exists, we can ignore it.
+          if ($errorInfo[1] == 955) {
+            $ok = true;
+          }
+        }
+      }
+
+      if (!$ok) {print_r($db->errorInfo()); exit;}
 
     } else {
 
